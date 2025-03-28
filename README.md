@@ -5,6 +5,9 @@ Este es un proyecto de React. Puedes correrlo en tu entorno local utilizando `np
 
 Para probar el ambiente desplegado pueden visitar [<URL de la webapp>](http://seek-todo-list.s3-website-us-east-1.amazonaws.com/login)
 
+usuario: test
+contraseña: password123
+
 ## Requisitos
 
 - [Node.js](https://nodejs.org/) (se recomienda la versión LTS)
