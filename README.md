@@ -77,26 +77,6 @@ Si deseas detener el contenedor, puedes usar el siguiente comando:
 docker-compose down
 ```
 
-## Estructura del Proyecto
-
-El proyecto tiene la siguiente estructura:
-
-```
-/public        # Archivos estáticos (como index.html)
-/src           # Código fuente de la aplicación
-  /components  # Componentes de React
-  /styles      # Archivos de estilo (CSS o SASS)
-  /assets      # Imágenes, fuentes y otros recursos
-  /utils       # Funciones de utilidad
-  App.js       # Componente principal
-  index.js     # Punto de entrada de React
-  routes.js    # Definición de rutas (si aplica)
-/docker        # Archivos relacionados con Docker
-  Dockerfile   # Dockerfile para construir la imagen del contenedor
-  docker-compose.yml  # Configuración para levantar el contenedor
-/package.json  # Dependencias y scripts del proyecto
-```
-
 ## Scripts disponibles
 
 - `npm run dev`: Levanta el servidor de desarrollo en local.
