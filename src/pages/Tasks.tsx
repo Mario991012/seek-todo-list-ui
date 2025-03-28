@@ -194,10 +194,10 @@ const Tasks: React.FC = () => {
             color="primary"
             onClick={() => setIsModalOpen(true)}
           >
-            Create New Task
+            Crear nueva tarea
           </Button>
           <Button variant="outlined" color="secondary" onClick={logout}>
-            Log Out
+            Cerrar sesion
           </Button>
         </Box>
       </Box>
@@ -234,7 +234,7 @@ const Tasks: React.FC = () => {
       >
         <TextField
           fullWidth
-          label="Search tasks"
+          label="Buscar tareas"
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -248,26 +248,26 @@ const Tasks: React.FC = () => {
             onChange={(e) => setStatusFilter(e.target.value)}
           >
             <MenuItem value="">All</MenuItem>
-            <MenuItem value={TASK_STATUS.COMPLETED}>Completed</MenuItem>
-            <MenuItem value={TASK_STATUS.PENDING}>Pending</MenuItem>
-            <MenuItem value={TASK_STATUS.IN_PROGRESS}>In Progress</MenuItem>
+            <MenuItem value={TASK_STATUS.COMPLETED}>Completado</MenuItem>
+            <MenuItem value={TASK_STATUS.PENDING}>Pendiente</MenuItem>
+            <MenuItem value={TASK_STATUS.IN_PROGRESS}>En progreso</MenuItem>
           </Select>
         </FormControl>
 
         <FormControl fullWidth sx={{ minWidth: { xs: "100%", sm: 150 } }}>
-          <InputLabel>Sort by Date</InputLabel>
+          <InputLabel>Ordenar por fecha</InputLabel>
           <Select
             value={sortOrder}
             label="Sort by Date"
             onChange={(e) => setSortOrder(e.target.value)}
           >
-            <MenuItem value="asc">Ascending</MenuItem>
-            <MenuItem value="desc">Descending</MenuItem>
+            <MenuItem value="asc">Ascendente</MenuItem>
+            <MenuItem value="desc">Descendiente</MenuItem>
           </Select>
         </FormControl>
 
         <FormControl fullWidth sx={{ minWidth: { xs: "100%", sm: 100 } }}>
-          <InputLabel>Tasks per page</InputLabel>
+          <InputLabel>Tareas por página</InputLabel>
           <Select
             value={pageSize}
             label="Tasks per page"
@@ -282,7 +282,7 @@ const Tasks: React.FC = () => {
       </Box>
 
       {tasks.length === 0 ? (
-        <Typography>No tasks found</Typography>
+        <Typography>Sin tareas</Typography>
       ) : (
         <Grid container spacing={3}>
           {tasks.map((task) => (
