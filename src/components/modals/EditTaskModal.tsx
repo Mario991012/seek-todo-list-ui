@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Box, TextField, Button, Typography, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { TASK_STATUS } from '../../common/enums/task';
 
 interface EditTaskModalProps {
   open: boolean;
   onClose: () => void;
   task: any;
-  onSave: (id: string, title: string, description: string, completed: boolean) => void;
+  onSave: (_id: string, title: string, description: string, status: TASK_STATUS) => void;
 }
 
 const EditTaskModal: React.FC<EditTaskModalProps> = ({ open, onClose, task, onSave }) => {
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
-  const [completed, setCompleted] = useState(task.completed);
+  const [status, setStatus] = useState<TASK_STATUS>(task.status || TASK_STATUS.PENDING);
   const [error, setError] = useState('');
 
   useEffect(() => {
     setTitle(task.title);
     setDescription(task.description);
-    setCompleted(task.completed);
+    setStatus(task.status || TASK_STATUS.PENDING);
   }, [task]);
 
   const handleSubmit = () => {
@@ -25,7 +26,12 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ open, onClose, task, onSa
       setError('All fields are required');
       return;
     }
-    onSave(task.id, title, description, completed);
+    onSave(task._id, title, description, status);
+  };
+
+  const handleDelete = () => {
+    onSave(task._id, title, description, TASK_STATUS.DELETED); // Assuming BORRADO is a valid status in TASK_STATUS
+    onClose();
   };
 
   return (
@@ -68,19 +74,25 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ open, onClose, task, onSa
         <FormControl fullWidth margin="normal">
           <InputLabel>Estado</InputLabel>
           <Select
-            value={completed.toString()}
-            onChange={(e) => setCompleted(e.target.value === 'true')}
+            value={status}
+            onChange={(e) => setStatus(e.target.value as TASK_STATUS)}
             label="Estado"
           >
-            <MenuItem value="false">Por hacer</MenuItem>
-            <MenuItem value="true">Completada</MenuItem>
+            {Object.values(TASK_STATUS).map((status) => (
+              <MenuItem key={status} value={status}>
+                {status}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
 
         <Box mt={2} display="flex" justifyContent="flex-end">
-          <Button onClick={onClose} sx={{ mr: 2 }}>Cancel</Button>
+          <Button onClick={onClose} sx={{ mr: 2 }}>Cancelar</Button>
+          <Button variant="contained" color="error" onClick={handleDelete} sx={{ mr: 2 }}>
+            Borrar
+          </Button>
           <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Save
+            Guardar
           </Button>
         </Box>
       </Box>

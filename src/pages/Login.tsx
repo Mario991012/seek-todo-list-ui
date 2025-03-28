@@ -14,7 +14,7 @@ const Login: React.FC = () => {
 
     try {
       const response = await loginUser(username, password);
-      
+
       if(response.return_code === "0") {
         navigate('/tasks');
       }
@@ -25,13 +25,11 @@ const Login: React.FC = () => {
 
   return (
     <Container
-      maxWidth="lg"
-      sx={{
+      maxWidth={false}
+      style={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '100vh',
-        minWidth: '100%'
       }}
     >
       <Box sx={{ p: 4, boxShadow: 3, borderRadius: 2, textAlign: 'center' }}>

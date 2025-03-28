@@ -12,10 +12,9 @@ interface TaskCardProps {
     createdAt: number;
   };
   onEdit: () => void;
-  onDelete: () => void;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
+const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit }) => {
   const { title, description, status, createdAt } = task;
   const formattedDate = moment(createdAt).format('DD MMM YYYY, h:mm a');
 
@@ -35,8 +34,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
       }}
     >
       <Chip
-        label={status === TASK_STATUS.COMPLETED ? 'Completed' : 'Pending'}
-        color={status === TASK_STATUS.COMPLETED ? 'success' : 'warning'}
+        label={task.status}
+        color={TASK_COLORS[task.status]}
         sx={{
           position: 'absolute',
           top: '16px',
@@ -63,7 +62,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
             {description}
           </Typography>
           <Typography variant="caption" color="text.secondary">
-            Created on: {formattedDate}
+            Creado: {formattedDate}
           </Typography>
         </Box>
       </CardContent>
@@ -82,18 +81,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
             }}
             onClick={onEdit}
           >
-            Details
-          </Button>
-          <Button
-            size="small"
-            variant="contained"
-            color="error"
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete();
-            }}
-          >
-            Delete
+            Ver detalles
           </Button>
         </Box>
       </CardActions>
