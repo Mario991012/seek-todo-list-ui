@@ -6,7 +6,7 @@ import {
 } from "../environment";
 import { TASK_STATUS } from "../common/enums/task";
 
-const API_URL = import.meta.env.VITE_API_URL || "";
+const API_URL = import.meta.env.VITE_API_URL || "https://seek-todo-list-backend-production.up.railway.app";
 
 export const fetchTasks = async (token: string) => {
   try {

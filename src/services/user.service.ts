@@ -5,7 +5,7 @@ import {
 } from "../environment";
 import { TokenService } from "../core/services/token.service";
 
-const API_URL = import.meta.env.VITE_API_URL || "";
+const API_URL = import.meta.env.VITE_API_URL || "https://seek-todo-list-backend-production.up.railway.app";
 const tokenService = new TokenService();
 
 export const createUser = async (
