@@ -3,8 +3,10 @@ import {
   CREATE_USER,
   LOGIN_USER,
 } from "../environment";
+import { TokenService } from "../core/services/token.service";
 
-const API_URL = process.env.REACT_APP_API_URL || "";
+const API_URL = import.meta.env.VITE_API_URL || "";
+const tokenService = new TokenService();
 
 export const createUser = async (
   username: string,
@@ -25,20 +27,27 @@ export const createUser = async (
 export const loginUser = async (
   username: string,
   password: string,
-  token: string
 ) => {
   try {
     const response = await axios.post(
       LOGIN_USER(API_URL),
       { username, password },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
     );
+    if(response?.data?.access_token) {
+      tokenService.saveToken(response?.data?.access_token)
+    }
+
     return response.data;
   } catch (error) {
     throw new Error("Error while log in");
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    tokenService.deleteToken()
+    return true;
+  } catch (error) {
+    throw new Error("Error while log out");
   }
 };
