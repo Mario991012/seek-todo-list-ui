@@ -4,6 +4,7 @@ import {
   FETCH_TASKS,
   UPDATE_TASK,
 } from "../environment";
+import { TASK_STATUS } from "../common/enums/task";
 
 const API_URL = import.meta.env.VITE_API_URL || "";
 
@@ -45,13 +46,13 @@ export const updateTask = async (
   id: string,
   title: string,
   description: string,
-  completed: boolean,
+  status: TASK_STATUS,
   token: string
 ) => {
   try {
     const response = await axios.put(
       UPDATE_TASK(API_URL, id),
-      { title, description, completed },
+      { title, description, status },
       {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -20,7 +20,7 @@ import TaskCard from "../components/cards/TaskCard";
 import CreateTaskModal from "../components/modals/CreateTaskModal";
 import EditTaskModal from "../components/modals/EditTaskModal";
 import { createTask, fetchTasks, updateTask } from "../services/task.service";
-import { TASK_STATUS } from "../common/enums/task";
+import { TASK_STATUS, TASK_COLORS } from "../common/enums/task";
 import { ORDER_BY } from "../common/enums/common";
 
 const Tasks: React.FC = () => {
@@ -80,10 +80,8 @@ const Tasks: React.FC = () => {
     }
 
     if (statusFilter) {
-      filteredTasks = filteredTasks.filter((task) =>
-        statusFilter === TASK_STATUS.COMPLETED
-          ? task.completed
-          : !task.completed
+      filteredTasks = filteredTasks.filter(
+        (task) => task.status === statusFilter
       );
     }
 
@@ -117,10 +115,10 @@ const Tasks: React.FC = () => {
     id: string,
     title: string,
     description: string,
-    completed: boolean
+    status: TASK_STATUS
   ) => {
     try {
-      await updateTask(id, title, description, completed, token as string);
+      await updateTask(id, title, description, status, token as string);
       setIsEditModalOpen(false);
       loadTasks();
     } catch (err) {
@@ -204,8 +202,9 @@ const Tasks: React.FC = () => {
             onChange={(e) => setStatusFilter(e.target.value)}
           >
             <MenuItem value="">All</MenuItem>
-            <MenuItem value="completed">Completed</MenuItem>
-            <MenuItem value="pending">Pending</MenuItem>
+            <MenuItem value={TASK_STATUS.COMPLETED}>Completed</MenuItem>
+            <MenuItem value={TASK_STATUS.PENDING}>Pending</MenuItem>
+            <MenuItem value={TASK_STATUS.IN_PROGRESS}>In Progress</MenuItem>
           </Select>
         </FormControl>
 

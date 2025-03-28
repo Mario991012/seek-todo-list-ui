@@ -34,8 +34,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit }) => {
       }}
     >
       <Chip
-        label={status === TASK_STATUS.COMPLETED ? 'Completed' : 'Pending'}
-        color={status === TASK_STATUS.COMPLETED ? 'success' : 'warning'}
+        label={task.status}
+        color={TASK_COLORS[task.status]}
         sx={{
           position: 'absolute',
           top: '16px',
