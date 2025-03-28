@@ -12,10 +12,9 @@ interface TaskCardProps {
     createdAt: number;
   };
   onEdit: () => void;
-  onDelete: () => void;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
+const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit }) => {
   const { title, description, status, createdAt } = task;
   const formattedDate = moment(createdAt).format('DD MMM YYYY, h:mm a');
 
@@ -83,17 +82,6 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
             onClick={onEdit}
           >
             Details
-          </Button>
-          <Button
-            size="small"
-            variant="contained"
-            color="error"
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete();
-            }}
-          >
-            Delete
           </Button>
         </Box>
       </CardActions>
