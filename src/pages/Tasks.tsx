@@ -23,6 +23,7 @@ import { createTask, fetchTasks, updateTask } from "../services/task.service";
 import { TASK_STATUS } from "../common/enums/task";
 import { ORDER_BY } from "../common/enums/common";
 import { TokenService } from "../core/services/token.service";
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts"; // Import recharts components
 
 const Tasks: React.FC = () => {
   const tokenService = new TokenService();
@@ -152,9 +153,28 @@ const Tasks: React.FC = () => {
     setPageIndex(0);
   };
 
+  const getStatusDistribution = () => {
+    const statusCount = {
+      [TASK_STATUS.COMPLETED]: 0,
+      [TASK_STATUS.PENDING]: 0,
+      [TASK_STATUS.IN_PROGRESS]: 0,
+    };
+
+    allTasks.forEach((task) => {
+      if (task.status in statusCount) {
+        statusCount[task.status] += 1;
+      }
+    });
+
+    return Object.keys(statusCount).map((status) => ({
+      name: status,
+      value: statusCount[status as keyof typeof statusCount],
+    }));
+  };
+
   if (loading || loadingTasks) return <CircularProgress />;
   return (
-    <Container maxWidth={false} sx={{ mt: 4 }} >
+    <Container maxWidth={false} sx={{ mt: 4 }}>
       <Box
         display="flex"
         justifyContent="space-between"
@@ -180,6 +200,29 @@ const Tasks: React.FC = () => {
             Log Out
           </Button>
         </Box>
+      </Box>
+
+      {/* Pie Chart for Task Status */}
+      <Box display="flex" justifyContent="center" mb={4}>
+        <PieChart width={300} height={300}>
+          <Pie
+            data={getStatusDistribution()}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            innerRadius={70}
+            outerRadius={90}
+            fill="#8884d8"
+            label
+          >
+            <Cell key="completed" fill="#4caf50" />
+            <Cell key="pending" fill="#f44336" />
+            <Cell key="in_progress" fill="#ff9800" />
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
       </Box>
 
       <Box
