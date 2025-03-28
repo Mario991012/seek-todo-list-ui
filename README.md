@@ -3,7 +3,7 @@
 
 Este es un proyecto de React. Puedes correrlo en tu entorno local utilizando `npm run dev` o usar Docker para levantar el entorno de desarrollo con `docker-compose up --build`.
 
-Para probar el ambiente desplegado pueden visitar http://seek-todo-list.s3-website-us-east-1.amazonaws.com/login
+Para probar el ambiente desplegado pueden visitar [http://seek-todo-list.s3-website-us-east-1.amazonaws.com/login](https://main.d1rl7w9haztia1.amplifyapp.com/login)
 
 usuario: test
 
