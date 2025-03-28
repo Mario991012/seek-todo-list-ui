@@ -1,54 +1,104 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Proyecto de React
 
-Currently, two official plugins are available:
+Este es un proyecto de React. Puedes correrlo en tu entorno local utilizando `npm run dev` o usar Docker para levantar el entorno de desarrollo con `docker-compose up --build`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Requisitos
 
-## Expanding the ESLint configuration
+- [Node.js](https://nodejs.org/) (se recomienda la versión LTS)
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Instalación
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 1. Clona el repositorio
+
+```bash
+git clone [<URL del repositorio>](https://github.com/Mario991012/seek-todo-list-ui.git)
+cd seek-todo-list-ui
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Instalación de dependencias
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+#### En entorno local:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+Para instalar las dependencias del proyecto en tu entorno local, ejecuta el siguiente comando:
+
+```bash
+npm install
 ```
+
+Agregar archivo .env en raiz del codigo con lo siguiente:
+```
+VITE_API_URL=https://seek-todo-list-backend-production.up.railway.app
+```
+*Por temas de tiempo y errores de AWS CDK en mi ambiente local, se despliega el servicio backend en este proveedor.
+
+#### Con Docker:
+
+Si prefieres usar Docker para correr la aplicación, no es necesario ejecutar `npm install`, ya que Docker instalará las dependencias por ti.
+
+## Ejecución
+
+### 1. En entorno local
+
+Para correr la aplicación en tu entorno local, utiliza el siguiente comando:
+
+```bash
+npm run dev
+```
+
+Esto iniciará el servidor de desarrollo en `http://localhost:5173` (o el puerto configurado en tu archivo `package.json`).
+
+### 2. Con Docker
+
+Si prefieres correr la aplicación dentro de un contenedor Docker, sigue estos pasos:
+
+1. Asegúrate de tener Docker y Docker Compose instalados.
+2. En el directorio raíz del proyecto, ejecuta:
+
+```bash
+docker-compose up --build
+```
+
+Este comando compilará y levantará el contenedor con la aplicación React. Una vez que se haya completado, podrás acceder a la aplicación en `http://localhost:80`.
+
+### 3. Detener el entorno de Docker
+
+Si deseas detener el contenedor, puedes usar el siguiente comando:
+
+```bash
+docker-compose down
+```
+
+## Estructura del Proyecto
+
+El proyecto tiene la siguiente estructura:
+
+```
+/public        # Archivos estáticos (como index.html)
+/src           # Código fuente de la aplicación
+  /components  # Componentes de React
+  /styles      # Archivos de estilo (CSS o SASS)
+  /assets      # Imágenes, fuentes y otros recursos
+  /utils       # Funciones de utilidad
+  App.js       # Componente principal
+  index.js     # Punto de entrada de React
+  routes.js    # Definición de rutas (si aplica)
+/docker        # Archivos relacionados con Docker
+  Dockerfile   # Dockerfile para construir la imagen del contenedor
+  docker-compose.yml  # Configuración para levantar el contenedor
+/package.json  # Dependencias y scripts del proyecto
+```
+
+## Scripts disponibles
+
+- `npm run dev`: Levanta el servidor de desarrollo en local.
+- `docker-compose up --build`: Levanta la aplicación en un contenedor Docker.
+- `npm run build`: Genera los archivos de producción para el despliegue.
+- `npm run lint`: Ejecuta un linting del código fuente.
+
+## Notas
+
+- Asegúrate de tener configurado correctamente Docker y Docker Compose antes de intentar ejecutar el proyecto con contenedores.
+- Si estás trabajando en un entorno de desarrollo local y tienes algún problema con los puertos, puedes cambiar la configuración del puerto en el archivo `package.json` o en el archivo `docker-compose.yml`.
