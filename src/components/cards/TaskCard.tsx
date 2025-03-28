@@ -62,7 +62,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit }) => {
             {description}
           </Typography>
           <Typography variant="caption" color="text.secondary">
-            Created on: {formattedDate}
+            Creado: {formattedDate}
           </Typography>
         </Box>
       </CardContent>
@@ -81,7 +81,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit }) => {
             }}
             onClick={onEdit}
           >
-            Details
+            Ver detalles
           </Button>
         </Box>
       </CardActions>

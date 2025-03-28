@@ -33,8 +33,9 @@ export const loginUser = async (
       LOGIN_USER(API_URL),
       { username, password },
     );
-    if(response?.data?.access_token) {
-      tokenService.saveToken(response?.data?.access_token)
+
+    if(response?.data?.data?.access_token) {
+      tokenService.saveToken(response?.data?.data?.access_token)
     }
 
     return response.data;

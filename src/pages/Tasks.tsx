@@ -22,10 +22,12 @@ import EditTaskModal from "../components/modals/EditTaskModal";
 import { createTask, fetchTasks, updateTask } from "../services/task.service";
 import { TASK_STATUS } from "../common/enums/task";
 import { ORDER_BY } from "../common/enums/common";
+import { TokenService } from "../core/services/token.service";
 
 const Tasks: React.FC = () => {
+  const tokenService = new TokenService();
   const { logout, loading } = useAuth();
-  const token = localStorage.getItem("token");
+  const token = tokenService.getToken();
   const [allTasks, setAllTasks] = useState<any[]>([]);
   const [tasks, setTasks] = useState<any[]>([]);
   const [loadingTasks, setLoadingTasks] = useState(true);
@@ -152,7 +154,7 @@ const Tasks: React.FC = () => {
 
   if (loading || loadingTasks) return <CircularProgress />;
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
+    <Container maxWidth={false} sx={{ mt: 4 }} >
       <Box
         display="flex"
         justifyContent="space-between"

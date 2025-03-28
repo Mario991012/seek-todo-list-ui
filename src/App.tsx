@@ -13,13 +13,11 @@ const App: React.FC = () => {
       <CssBaseline />
       <Router>
         <AuthProvider>
-          <div style={{ width: '100%', height: '100%' }}>
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/tasks" element={<Tasks />} />
               <Route path="/" element={<Navigate to="/login" replace />} />
             </Routes>
-          </div>
         </AuthProvider>
       </Router>
     </ThemeProvider>
