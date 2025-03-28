@@ -29,6 +29,11 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ open, onClose, task, onSa
     onSave(task._id, title, description, status);
   };
 
+  const handleDelete = () => {
+    onSave(task._id, title, description, TASK_STATUS.DELETED); // Assuming BORRADO is a valid status in TASK_STATUS
+    onClose();
+  };
+
   return (
     <Modal open={open} onClose={onClose}>
       <Box 
@@ -82,9 +87,12 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ open, onClose, task, onSa
         </FormControl>
 
         <Box mt={2} display="flex" justifyContent="flex-end">
-          <Button onClick={onClose} sx={{ mr: 2 }}>Cancel</Button>
+          <Button onClick={onClose} sx={{ mr: 2 }}>Cancelar</Button>
+          <Button variant="contained" color="error" onClick={handleDelete} sx={{ mr: 2 }}>
+            Borrar
+          </Button>
           <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Save
+            Guardar
           </Button>
         </Box>
       </Box>

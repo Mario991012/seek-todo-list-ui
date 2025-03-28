@@ -158,6 +158,7 @@ const Tasks: React.FC = () => {
       [TASK_STATUS.COMPLETED]: 0,
       [TASK_STATUS.PENDING]: 0,
       [TASK_STATUS.IN_PROGRESS]: 0,
+      [TASK_STATUS.DELETED]: 0,
     };
 
     allTasks.forEach((task) => {
@@ -219,6 +220,7 @@ const Tasks: React.FC = () => {
             <Cell key="completed" fill="#4caf50" />
             <Cell key="pending" fill="#f44336" />
             <Cell key="in_progress" fill="#ff9800" />
+            <Cell key="deleted" fill="red" />
           </Pie>
           <Tooltip />
           <Legend />
