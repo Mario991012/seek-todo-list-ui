@@ -154,7 +154,7 @@ const Tasks: React.FC = () => {
   };
 
   const getStatusDistribution = () => {
-    const statusCount = {
+    const statusCount: Record<TASK_STATUS, number> = {
       [TASK_STATUS.COMPLETED]: 0,
       [TASK_STATUS.PENDING]: 0,
       [TASK_STATUS.IN_PROGRESS]: 0,
@@ -163,10 +163,9 @@ const Tasks: React.FC = () => {
 
     allTasks.forEach((task) => {
       if (task.status in statusCount) {
-        statusCount[task.status] += 1;
+        statusCount[task.status as TASK_STATUS] += 1;  // Type assertion
       }
     });
-
     return Object.keys(statusCount).map((status) => ({
       name: status,
       value: statusCount[status as keyof typeof statusCount],
