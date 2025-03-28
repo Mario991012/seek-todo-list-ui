@@ -20,7 +20,7 @@ import TaskCard from "../components/cards/TaskCard";
 import CreateTaskModal from "../components/modals/CreateTaskModal";
 import EditTaskModal from "../components/modals/EditTaskModal";
 import { createTask, fetchTasks, updateTask } from "../services/task.service";
-import { TASK_STATUS, TASK_COLORS } from "../common/enums/task";
+import { TASK_STATUS } from "../common/enums/task";
 import { ORDER_BY } from "../common/enums/common";
 
 const Tasks: React.FC = () => {
@@ -112,13 +112,13 @@ const Tasks: React.FC = () => {
   };
 
   const handleEditTask = async (
-    id: string,
+    _id: string,
     title: string,
     description: string,
     status: TASK_STATUS
   ) => {
     try {
-      await updateTask(id, title, description, status, token as string);
+      await updateTask(_id, title, description, status, token as string);
       setIsEditModalOpen(false);
       loadTasks();
     } catch (err) {

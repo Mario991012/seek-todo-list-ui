@@ -6,7 +6,7 @@ interface EditTaskModalProps {
   open: boolean;
   onClose: () => void;
   task: any;
-  onSave: (id: string, title: string, description: string, status: TASK_STATUS) => void;
+  onSave: (_id: string, title: string, description: string, status: TASK_STATUS) => void;
 }
 
 const EditTaskModal: React.FC<EditTaskModalProps> = ({ open, onClose, task, onSave }) => {
@@ -26,7 +26,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ open, onClose, task, onSa
       setError('All fields are required');
       return;
     }
-    onSave(task.id, title, description, status);
+    onSave(task._id, title, description, status);
   };
 
   return (
